@@ -1,0 +1,19 @@
+---
+# SoC platform
+:platform:		lan969x
+# Total Memory Size (in Mbytes), single 4G-bit x16 device on a 16-bit bus
+:mem_size_mbytes:	512
+:mem_type:		DDR3
+:device_bus_width:	x16
+:active_ranks:		1
+# ECC disabled
+:ecc_mode:		0
+:mem_profile:		micron_ddr3_256Mx16_2B
+:_2T_mode:		0
+# DDR Clock of platform (Data Bus) - part supports DDR3-1600
+:clock_speed:		1600
+# Board ODT setup etc
+# RTT_NOM / drive strength / ZQ come from the LAN969x SVB DDR3 reference board
+# file. They are only a bring-up starting point and must be re-validated
+# against this board's signal integrity before production.
+:board:			lan969x_svb969x
