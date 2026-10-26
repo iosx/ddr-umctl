@@ -4,11 +4,10 @@
 # Total Memory Size (in Mbytes)
 :mem_size_mbytes:	1024
 :mem_type:		DDR3
-:device_bus_width:	x8
+:device_bus_width:	x16
 :active_ranks:		1
 :ecc_mode:		4
-:enable_half_bus:	true
-:mem_profile:		issi_ddr3_512Mx8
+:mem_profile:		micron_ddr3_256Mx16_2B
 :_2T_mode:		0
 # DDR Clock of platform (Data Bus)
 :clock_speed:		1667
