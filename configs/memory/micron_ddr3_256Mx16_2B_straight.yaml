@@ -1,0 +1,62 @@
+# Straight (non-rotated) variant of micron_ddr3_256Mx16_2B.yaml.
+#
+# Device: 4G-bit DDR3, x16, 2 KB page
+# (e.g. ISSI IS46TR16256BL, Micron MT41K256M16)
+#  - Bank Address:   BA0 ~ BA2
+#  - Row Address:    A0 ~ A14 (15 row bits, A15 not present)
+#  - Column Address: A0 ~ A9 (10 column bits)
+#
+# Microchip had to abandon the bank-rotation address map on SparX5 DDR3
+# (commit 3f52dfe, DBB-490: "Had to bring back 'straight' address map due
+# to weird instability issue"). This variant keeps the natural order:
+# column bits at the bottom, row bits above them, bank bits on top.
+#
+# Mapping rule: HIF bit = field value + the field's documented
+# "Internal Base". The mapper counts 32-bit beats, so mapper bit n is
+# byte address bit n+2 and the two lowest mapper bits hold the burst.
+# For 1 GByte / 32-bit bus / x16 devices the map must therefore cover
+# HIF[2..27] exactly once (8 column + 15 row + 3 bank bits = 26):
+#   HIF[2..9]   = CA2..CA9  (COL_B2..COL_B9   = 0)
+#   HIF[10..24] = RA0..RA14 (ROW_B*           = 4, ROW_B15 unused = 15)
+#   HIF[25..27] = BA0..BA2  (BANK_B0..BANK_B2 = 23)
+#
+# Compare configs/memory/micron_ddr3_256Mx16_2B.yaml, which rotates the
+# three highest column bits (CA7..CA9) to HIF[25..27] and spreads the
+# bank bits over HIF[3]/[7]/[8].
+---
+addrmap0:
+  ADDRMAP_CS_BIT0: 31
+addrmap1:
+  ADDRMAP_BANK_B0: 23
+  ADDRMAP_BANK_B1: 23
+  ADDRMAP_BANK_B2: 23
+addrmap2:
+  ADDRMAP_COL_B2: 0
+  ADDRMAP_COL_B3: 0
+  ADDRMAP_COL_B4: 0
+  ADDRMAP_COL_B5: 0
+addrmap3:
+  ADDRMAP_COL_B6: 0
+  ADDRMAP_COL_B7: 0
+  ADDRMAP_COL_B8: 0
+  ADDRMAP_COL_B9: 0
+addrmap4:
+  ADDRMAP_COL_B10: 31
+  ADDRMAP_COL_B11: 31
+addrmap5:
+  ADDRMAP_ROW_B0: 4
+  ADDRMAP_ROW_B1: 4
+  ADDRMAP_ROW_B2_10: 4
+  ADDRMAP_ROW_B11: 4
+addrmap6:
+  ADDRMAP_ROW_B12: 4
+  ADDRMAP_ROW_B13: 4
+  ADDRMAP_ROW_B14: 4
+  ADDRMAP_ROW_B15: 15
+  LPDDR3_6GB_12GB: 0
+addrmap7:
+  ADDRMAP_ROW_B16: 15
+  ADDRMAP_ROW_B17: 15
+addrmap8:
+  ADDRMAP_BG_B0: 63
+  ADDRMAP_BG_B1: 63

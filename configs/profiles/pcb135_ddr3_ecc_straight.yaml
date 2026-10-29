@@ -1,0 +1,20 @@
+---
+# Galaxy/Yinhe AIU bring-up: straight address map variant.
+# Identical electrical/timing configuration to pcb135_ddr3_ecc.yaml, the
+# only difference is the DDR address map (straight instead of the bank
+# rotation used by micron_ddr3_256Mx16_2B). Use for an A/B test against
+# DBB-490 ("straight" map required on SparX5 DDR3).
+# SoC platform
+:platform:		sparx5
+# Total Memory Size (in Mbytes)
+:mem_size_mbytes:	1024
+:mem_type:		DDR3
+:device_bus_width:	x16
+:active_ranks:		1
+:ecc_mode:		4
+:mem_profile:		micron_ddr3_256Mx16_2B_straight
+:_2T_mode:		0
+# DDR Clock of platform (Data Bus)
+:clock_speed:		1667
+# Board ODT setup etc
+:board:			pcb135
